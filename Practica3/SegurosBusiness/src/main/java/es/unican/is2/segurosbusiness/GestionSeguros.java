@@ -60,6 +60,7 @@ IInfoSeguros{
 		}
 		segurosC.add(s);
 		c.setSeguros(segurosC);
+		daoC.actualizaCliente(c);
 		
 		return s;
 	}
@@ -83,6 +84,7 @@ IInfoSeguros{
 			if (seg.getMatricula().equals(matricula)) {
 				segurosC.remove(seg);
 				c.setSeguros(segurosC);
+				daoC.actualizaCliente(c);
 				return seg;
 			}
 		}
