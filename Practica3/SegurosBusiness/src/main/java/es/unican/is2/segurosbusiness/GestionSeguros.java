@@ -14,12 +14,17 @@ import es.unican.is2.seguroscommon.Seguro;
 
 public class GestionSeguros implements IGestionClientes, IGestionSeguros,
 IInfoSeguros{
+	
+	IClientesDAO daoC;
+	ISegurosDAO daoV;
 	List<Cliente> clientes;
 	List<Seguro> seguros;
 
 	public GestionSeguros(IClientesDAO daoContribuyentes, ISegurosDAO daoVehiculos) {
 		this.clientes = daoContribuyentes.clientes();
 		this.seguros = daoVehiculos.seguros();
+		this.daoC = daoContribuyentes;
+		this.daoV= daoVehiculos;
 	}
 
 	public Cliente cliente(String dni) {
@@ -32,28 +37,33 @@ IInfoSeguros{
 	}
 
 	public Seguro seguro(String matricula) {
-		// TODO Auto-generated method stub
+		
+		for (Seguro s: seguros) {
+			if (s.getMatricula().equals(matricula)) {
+				return s;
+			}
+		}
 		return null;
 	}
 
 	public Seguro nuevoSeguro(Seguro s, String dni) throws OperacionNoValida {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return daoV.nuevoSeguro(s,dni);
 	}
 
 	public Seguro bajaSeguro(String matricula, String dni) throws OperacionNoValida {
-		// TODO Auto-generated method stub
-		return null;
+
+		return daoV.bajaSeguro(dni, matricula);
 	}
 
 	public Cliente nuevoCliente(Cliente c) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return daoC.creaCliente(c);
 	}
 
 	public Cliente bajaCliente(String dni) throws OperacionNoValida {
-		// TODO Auto-generated method stub
-		return null;
+
+		return daoC.eliminaCliente(dni);
 	}
 	
 	
