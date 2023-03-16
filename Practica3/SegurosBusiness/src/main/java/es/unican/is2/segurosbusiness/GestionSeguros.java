@@ -47,13 +47,50 @@ IInfoSeguros{
 	}
 
 	public Seguro nuevoSeguro(Seguro s, String dni) throws OperacionNoValida {
+		Cliente c = cliente(dni);
+		if (c == null) {
+			return null;
+		}
+		List<Seguro> segurosC = c.getSeguros();
 		
-		return daoV.nuevoSeguro(s,dni);
+		for (Seguro seg: segurosC) {
+			if (seg.equals(s)) {
+				throw new OperacionNoValida("El seguro ya existe");
+			}
+		}
+		segurosC.add(s);
+		c.setSeguros(segurosC);
+		
+		return s;
 	}
 
 	public Seguro bajaSeguro(String matricula, String dni) throws OperacionNoValida {
-
-		return daoV.bajaSeguro(dni, matricula);
+		
+		Cliente c = cliente(dni);
+		//Gestion de errores
+		if (c == null) {
+			return null;
+		}
+		Seguro s = seguro(matricula);
+		if (s == null) {
+			return null;
+		}
+		
+		List<Seguro> segurosC = c.getSeguros();
+		
+		//Comprobar los seguros del cliente
+		for (Seguro seg: segurosC) {
+			if (seg.getMatricula().equals(matricula)) {
+				segurosC.remove(seg);
+				c.setSeguros(segurosC);
+				return seg;
+			}
+		}
+		
+		//No pertenece al cliente
+		
+		throw new OperacionNoValida("El seguro no pertenece al dni del cliente indicado");
+	
 	}
 
 	public Cliente nuevoCliente(Cliente c) {
@@ -62,6 +99,11 @@ IInfoSeguros{
 	}
 
 	public Cliente bajaCliente(String dni) throws OperacionNoValida {
+		
+		Cliente c = cliente(dni);
+		if (c.getSeguros() != null) {
+			throw new OperacionNoValida("El cliente tiene seguros a su nombre");
+		}
 
 		return daoC.eliminaCliente(dni);
 	}
