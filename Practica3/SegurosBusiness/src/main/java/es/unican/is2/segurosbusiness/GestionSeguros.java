@@ -1,6 +1,8 @@
 
 package es.unican.is2.segurosbusiness;
 
+import java.util.List;
+
 import es.unican.is2.seguroscommon.Cliente;
 import es.unican.is2.seguroscommon.IClientesDAO;
 import es.unican.is2.seguroscommon.IGestionClientes;
@@ -12,13 +14,20 @@ import es.unican.is2.seguroscommon.Seguro;
 
 public class GestionSeguros implements IGestionClientes, IGestionSeguros,
 IInfoSeguros{
+	List<Cliente> clientes;
+	List<Seguro> seguros;
 
 	public GestionSeguros(IClientesDAO daoContribuyentes, ISegurosDAO daoVehiculos) {
-		// TODO Auto-generated constructor stub
+		this.clientes = daoContribuyentes.clientes();
+		this.seguros = daoVehiculos.seguros();
 	}
 
 	public Cliente cliente(String dni) {
-		// TODO Auto-generated method stub
+		for (Cliente c: clientes) {
+			if (c.getDni().equals(dni)) {
+				return c;
+			}
+		}
 		return null;
 	}
 

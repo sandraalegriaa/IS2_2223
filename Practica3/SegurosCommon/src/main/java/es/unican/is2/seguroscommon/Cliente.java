@@ -96,7 +96,15 @@ public class Cliente {
      * todos los seguros a su nombre
      */
     public double totalSeguros() {
-    	return 0;
+    	double precioTotal = 0;
+    	for (Seguro s: seguros) {
+    		precioTotal += s.precio();
+    	}
+    	if (minusvalia) {
+    		precioTotal = precioTotal*0.75;
+    	}
+    	
+    	return precioTotal;
     }
 
 }
