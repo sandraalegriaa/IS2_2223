@@ -91,7 +91,36 @@ public class Seguro {
      * @return
      */
     public double precio() {
-    	return 0;
+    	double precio = 0;
+    	//nivel de cobertura contratado
+    	switch (cobertura) {
+    		case TERCEROS:
+    			precio = 400;
+    			break;
+    		case TODORIESGO:
+    			precio = 1000;
+    			break;
+    		case TERCEROSLUNAS:
+    			precio = 600;
+    			break;		
+    	}
+    	//potencia coche
+    	if (potencia >= INICIO_TRAMO_1  && potencia <= FIN_TRAMO_1) {
+    		precio += precio*0.05;
+    	} else if (potencia > FIN_TRAMO_1){
+    		precio += precio*0.2;
+    	} 
+    	
+    	//oferta
+    	LocalDate fechaActual = LocalDate.now();
+    	if (fechaContratacion.isAfter(fechaActual.minusYears(1))) {
+    		precio = precio*DESCUENTO_PRIMER_ANHO;
+    	} else if(fechaContratacion.isBefore(fechaActual.minusYears(1)) && fechaContratacion.isAfter(fechaActual.minusYears(2))) {
+    		precio = precio*DESCUENTO_SEGUNDO_ANHO;
+    	}
+    	
+    	
+    	return precio;
     }
 
 }
