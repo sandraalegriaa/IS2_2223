@@ -85,6 +85,7 @@ IInfoSeguros{
 				segurosC.remove(seg);
 				c.setSeguros(segurosC);
 				daoC.actualizaCliente(c);
+				daoV.eliminaSeguro(matricula);
 				return seg;
 			}
 		}
