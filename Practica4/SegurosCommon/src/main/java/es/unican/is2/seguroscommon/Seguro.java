@@ -39,7 +39,14 @@ public class Seguro {
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate fechaContratacion;
     
-    public Seguro() {}
+    public Seguro(Cobertura c, int p, LocalDate f, String m) {
+    	this.cobertura = c;
+    	this.potencia = p;
+    	this.fechaContratacion = f;
+    	this.matricula = m;
+    	
+    	
+    }
 
 	/**
 	 * Retorna la matr�cula del coche 
@@ -52,9 +59,9 @@ public class Seguro {
 	/**
 	 * Define el valor para la matr�cula
 	 */
-	public void setMatricula(String matricula) {
+	/*public void setMatricula(String matricula) {
 		this.matricula = matricula;
-	}
+	}*/
 
 	/**
 	 * Retorna el tipo de cobertura del seguro
@@ -66,9 +73,9 @@ public class Seguro {
 	/**
 	 * Define el valor para la cobertura
 	 */
-	public void setCobertura(Cobertura cobertura) {
+	/*public void setCobertura(Cobertura cobertura) {
 		this.cobertura = cobertura;
-	}
+	}*/
 
 
 	/**
@@ -82,9 +89,9 @@ public class Seguro {
     /**
      * Define el valor de la potencia.
      */
-    public void setPotencia(int value) {
+    /*public void setPotencia(int value) {
         this.potencia = value;
-    }
+    }*/
     
     /**
      * Retorna el precio del seguro
