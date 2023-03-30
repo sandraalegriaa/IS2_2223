@@ -60,6 +60,9 @@ public class Seguro {
 	public static class FechaNulaEx extends RuntimeException {
     }
     
+    public Seguro(){
+    }
+    
     public Seguro(Cobertura c, int p, LocalDate f, String m) {
     	this.cobertura = c;
     	this.potencia = p;

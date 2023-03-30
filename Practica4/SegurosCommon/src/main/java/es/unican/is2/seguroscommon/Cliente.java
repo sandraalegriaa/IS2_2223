@@ -31,8 +31,15 @@ public class Cliente {
     @XmlAttribute(required = true)
     private boolean minusvalia;
     
+    public Cliente(){
+    }
     
-    public Cliente(){}  
+    public Cliente(List<Seguro> seguros, String n, String dni, boolean m){
+    	this.seguros = seguros;
+    	this.nombre = n;
+    	this.dni = dni;
+    	this.minusvalia = m;
+    }  
 
 	/**
      * Retorna los seguros del cliente 
