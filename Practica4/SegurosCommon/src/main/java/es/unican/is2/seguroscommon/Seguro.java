@@ -39,6 +39,27 @@ public class Seguro {
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     private LocalDate fechaContratacion;
     
+    /**
+     * Lanzada si la potencia es negativa
+     */
+    @SuppressWarnings("serial")
+	public static class PotenciaNegativaEx extends RuntimeException {
+    }
+    
+    /**
+     * Lanzada si la fecha de contratacion es mayor que la fecha actual
+     */
+    @SuppressWarnings("serial")
+	public static class FechaContratacionFuturaEx extends RuntimeException {
+    }
+    
+    /**
+     * Lanzada si la fecha de contratacion es nula
+     */
+    @SuppressWarnings("serial")
+	public static class FechaNulaEx extends RuntimeException {
+    }
+    
     public Seguro(Cobertura c, int p, LocalDate f, String m) {
     	this.cobertura = c;
     	this.potencia = p;
@@ -97,7 +118,23 @@ public class Seguro {
      * Retorna el precio del seguro
      * @return
      */
-    public double precio() {
+    public double precio() throws PotenciaNegativaEx, FechaContratacionFuturaEx, FechaNulaEx{
+    	LocalDate fechaActual = LocalDate.now();
+    	
+    	if (potencia < 0) {
+    		throw new PotenciaNegativaEx();
+    	}
+    	
+    	if (fechaContratacion == null) {
+    		throw new FechaNulaEx();
+    	}
+    	
+    	if (fechaContratacion.isAfter(fechaActual)) {
+    		throw new FechaContratacionFuturaEx();
+    	}
+    	
+    	
+    	
     	double precio = 0;
     	//nivel de cobertura contratado
     	switch (cobertura) {
@@ -119,7 +156,7 @@ public class Seguro {
     	} 
     	
     	//oferta
-    	LocalDate fechaActual = LocalDate.now();
+    	
     	if (fechaContratacion.isAfter(fechaActual.minusYears(1))) {
     		precio = precio*DESCUENTO_PRIMER_ANHO;
     	} else if(fechaContratacion.isBefore(fechaActual.minusYears(1)) && fechaContratacion.isAfter(fechaActual.minusYears(2))) {
