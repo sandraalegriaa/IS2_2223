@@ -3,6 +3,7 @@ package es.unican.is2.segurosmain;
 
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.fest.swing.fixture.FrameFixture;
@@ -42,6 +43,8 @@ public class VistaAgenteTest {
 
 	@Test
 	public void test() {
+		
+		//comprobacion del boton
 		demo.button("btnBuscar").requireText("Buscar");
 		
 		
@@ -54,18 +57,36 @@ public class VistaAgenteTest {
 		
 		demo.textBox("txtTotalCliente").requireText("675.0");
 		
-		demo.list("listSeguros").valueAt(0);
-		assertTrue(demo.list("listSeguros").valueAt(0) == "PLL9597 TODORIESGO");
+		
+		assertTrue(demo.list("listSeguros").valueAt(0).equals("PLL9597 TODORIESGO"));
+		
+		// Sleep para visualizar como se realiza el test
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//buscar cliente inexistente
-		/*demo.textBox("txtDniCliente").enterText("321");
+		demo.textBox("txtDNICliente").setText("");
 		
-		demo.textBox("txtNombreCliente").requireText("Cliente no encontrado");
+		demo.button("btnBuscar").click();
+		
+		demo.textBox("txtNombreCliente").requireText("DNI No Válido");
 		
 		demo.textBox("txtTotalCliente").requireText("");
 		
-		demo.list("listSeguros").valueAt(0);
-		assertTrue(demo.list("listSeguros").valueAt(0) == "");*/
+		//esta excepcion se lanza cuando la lista no tiene elementos ya que no existe ni el primer elemento
+		assertThrows(IndexOutOfBoundsException.class , () -> demo.list("listSeguros").valueAt(0));
+		
+		// Sleep para visualizar como se realiza el test
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
