@@ -20,7 +20,7 @@ import es.unican.is2.segurosdao.SegurosDAO;
 import es.unican.is2.segurosgui.VistaAgente;
 
 
-public class VistaAgenteTest {
+public class VistaAgenteITest {
 	
 	
 	private FrameFixture demo;
@@ -68,7 +68,7 @@ public class VistaAgenteTest {
 			e.printStackTrace();
 		}
 		
-		//buscar cliente inexistente
+		//buscar un dni vacio
 		demo.textBox("txtDNICliente").setText("");
 		
 		demo.button("btnBuscar").click();
@@ -85,6 +85,26 @@ public class VistaAgenteTest {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//buscar cliente inexistente
+		demo.textBox("txtDNICliente").setText("123");
+				
+		demo.button("btnBuscar").click();
+				
+		demo.textBox("txtNombreCliente").requireText("DNI No Válido");
+				
+		demo.textBox("txtTotalCliente").requireText("");
+				
+		//esta excepcion se lanza cuando la lista no tiene elementos ya que no existe ni el primer elemento
+		assertThrows(IndexOutOfBoundsException.class , () -> demo.list("listSeguros").valueAt(0));
+				
+		//Sleep para visualizar como se realiza el test
+		try {
+					Thread.sleep(1000);
+		} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
