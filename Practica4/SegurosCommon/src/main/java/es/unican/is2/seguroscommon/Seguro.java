@@ -169,5 +169,24 @@ public class Seguro {
     	
     	return precio;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+    	
+    	if (o == null) {
+    		return false;
+    	}
+    	if (this.getClass() != o.getClass()) {
+    		return false;
+    	}
+    	
+    	Seguro segur = (Seguro) o; 
+    	
+    	if (this.matricula.equals(segur.getMatricula())) {
+    		return true;
+    	}
+    	
+    	return false;
+    }
 
 }
