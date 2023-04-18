@@ -28,6 +28,8 @@ IInfoSeguros{
 	}
 
 	public Cliente cliente(String dni) {
+		List<Cliente> clientes = daoC.clientes();
+		
 		for (Cliente c: clientes) {
 			if (c.getDni().equals(dni)) {
 				return c;
@@ -52,12 +54,14 @@ IInfoSeguros{
 			return null;
 		}
 		List<Seguro> segurosC = c.getSeguros();
+		List<Seguro> seguros = daoV.seguros();
 		
-		for (Seguro seg: segurosC) {
+		for (Seguro seg: seguros) {
 			if (seg.equals(s)) {
 				throw new OperacionNoValida("El seguro ya existe");
 			}
 		}
+		daoV.creaSeguro(s);
 		segurosC.add(s);
 		c.setSeguros(segurosC);
 		daoC.actualizaCliente(c);
@@ -104,7 +108,12 @@ IInfoSeguros{
 	public Cliente bajaCliente(String dni) throws OperacionNoValida {
 		
 		Cliente c = cliente(dni);
-		if (c.getSeguros() != null) {
+		
+		if (c == null) {
+			return null;
+		}
+		
+		if (c.getSeguros().size() != 0) {
 			throw new OperacionNoValida("El cliente tiene seguros a su nombre");
 		}
 
