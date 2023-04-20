@@ -7,27 +7,27 @@ public class Movimiento {
 	private LocalDateTime mFecha;
 	private double mImporte;
 
-	public double getI() {
+	public double getI() { //WMC +1 CCog +0
 		return mImporte;
 	}
 
-	public void setI(double newMImporte) {
+	public void setI(double newMImporte) { //WMC +1 CCog +0
 		mImporte = newMImporte;
 	}
 	
-	public String getC() {
+	public String getC() { //WMC +1 CCog +0
 		return mConcepto;
 	}
 
-	public void setC(String newMConcepto) {
+	public void setC(String newMConcepto) { //WMC +1 CCog +0
 		mConcepto = newMConcepto;
 	}
 
-	public LocalDateTime getF() {
+	public LocalDateTime getF() { //WMC +1 CCog +0
 		return mFecha;
 	}
 
-	public void setF(LocalDateTime newMFecha) {
+	public void setF(LocalDateTime newMFecha) { //WMC +1 CCog +0
 		mFecha = newMFecha;
 	}
 	
