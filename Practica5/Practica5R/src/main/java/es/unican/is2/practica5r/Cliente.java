@@ -15,7 +15,7 @@ public class Cliente {
     private List<Cuenta> Cuentas = new LinkedList<Cuenta>();
 
  	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) {  
+ 			String telefono, String dni) {  //WMC + 1 CCog +0
 		this.nombre = titular;
 		this.calle = calle;
 		this.zip = zip;
@@ -24,51 +24,45 @@ public class Cliente {
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) {
+	public void cambiaDireccion(String calle, String zip, String localidad) { //WMC + 1 CCog +0
 		this.calle = calle;
 		this.zip = zip;
 		this.localidad = localidad;
 	}
 	
-	public void anhadeCuenta(Cuenta c) {
+	public void anhadeCuenta(Cuenta c) { //WMC + 1 CCog +0
 		Cuentas.add(c);
 	}
 	
-	public double getSaldoTotal() {
+	public double getSaldoTotal() { //WMC + 1
 		double total = 0.0;
-		for (Cuenta c: Cuentas) {  
-			if (c instanceof CuentaAhorro) {
-				total += ((CuentaAhorro) c).getSaldo();
-			} else if (c instanceof CuentaValores)  {
-				for (Valor v: ((CuentaValores) c).getValores()) {
-					total += v.getCotizacion()*v.getNumValores();
-				}
-			}
+		for (Cuenta c: Cuentas) {  //WMC + 1 CCog +1
+			total += c.getSaldo();
 		}
 		return total;
 	}
 	
-	public String getNombre() {
+	public String getNombre() { //WMC + 1 CCog +0
 		return nombre;
 	}
 
-	public String getCalle() {
+	public String getCalle() { //WMC + 1 CCog +0
 		return calle;
 	}
 
-	public String getZip() {
+	public String getZip() { //WMC + 1 CCog +0
 		return zip;
 	}
 
-	public String getLocalidad() {
+	public String getLocalidad() { //WMC + 1 CCog +0
 		return localidad;
 	}
 
-	public String getTelefono() {
+	public String getTelefono() { //WMC + 1 CCog +0
 		return telefono;
 	}
 
-	public String getDni() {
+	public String getDni() { //WMC + 1
 		return dni;
 	}
 	
