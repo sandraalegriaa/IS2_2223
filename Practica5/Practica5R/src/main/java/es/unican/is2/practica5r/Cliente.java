@@ -6,9 +6,7 @@ import java.util.List;
 public class Cliente {
 	
 	public String nombre;
-	public String calle;
-	public String zip;
-	public String localidad;
+	public Direccion dir;
 	public String telefono;
 	public String dni;
 	
@@ -17,18 +15,12 @@ public class Cliente {
  	public Cliente(String titular, String calle, String zip, String localidad, 
  			String telefono, String dni) {  //WMC + 1 CCog +0
 		this.nombre = titular;
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
+		this.dir = new Direccion(calle, zip, localidad);
 		this.telefono = telefono;
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) { //WMC + 1 CCog +0
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
-	}
+	
 	
 	public void anhadeCuenta(Cuenta c) { //WMC + 1 CCog +0
 		Cuentas.add(c);
@@ -46,18 +38,10 @@ public class Cliente {
 		return nombre;
 	}
 
-	public String getCalle() { //WMC + 1 CCog +0
-		return calle;
+	public Direccion getDireccion() { //WMC + 1 Ccog +0 
+		return dir;
 	}
-
-	public String getZip() { //WMC + 1 CCog +0
-		return zip;
-	}
-
-	public String getLocalidad() { //WMC + 1 CCog +0
-		return localidad;
-	}
-
+	
 	public String getTelefono() { //WMC + 1 CCog +0
 		return telefono;
 	}

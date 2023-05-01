@@ -13,6 +13,6 @@ public abstract class Cuenta {
 		return numCuenta;
 	}
 	
-	public abstract double getSaldo(); //WMC +1 CCog +0
+	public abstract double getSaldo(); //WMC +0 CCog +0
 	
 }

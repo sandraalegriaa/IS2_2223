@@ -32,6 +32,7 @@ public class Credito extends Tarjeta {
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
 		x += x * 0.05; // A�adimos una comisi�n de un 5%
+	
 		LocalDateTime now = LocalDateTime.now();
 		Movimiento m = new Movimiento(now, "Retirada en cajero autom�tico", -x);
 		

@@ -22,23 +22,13 @@ public class CuentaAhorro extends Cuenta {
 	}
 
 	public void ingresar(double x) throws datoErroneoException { //WMC +1 Ccog +0
-		getionExcepcionesIngresar(x);
-		LocalDateTime now = LocalDateTime.now();
-		Movimiento m = new Movimiento(now, "Ingreso en efectivo", x);
-		saldo += x;
-		this.mMovimientos.add(m);
-		
-		//dentro del otro ingreso con concepto = string
+		String concepto = "Ingreso en efectivo";
+		ingresar(concepto, x);
 	}
 
 	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException { //WMC +1 Ccog +0
-		gestionExcepcionesRetirar(x);
-		LocalDateTime now = LocalDateTime.now();
-		Movimiento m = new Movimiento(now, "Retirada de efectivo", -x);
-		saldo -= x;
-		this.mMovimientos.add(m);
-		
-		//dentro del otro retirar con concepto = string
+		String concepto = "Retirada de efectivo";
+		retirar(concepto, x);
 	}
 
 	public void ingresar(String concepto, double x) throws datoErroneoException { //WMC +1 Ccog +0
@@ -75,6 +65,7 @@ public class CuentaAhorro extends Cuenta {
 
 	public void addMovimiento(Movimiento m) { //WMC +1 CCog +0
 		mMovimientos.add(m);
+		saldo += m.getI();
 	}
 
 	public List<Movimiento> getMovimientos() { //WMC +1 CCog +0
